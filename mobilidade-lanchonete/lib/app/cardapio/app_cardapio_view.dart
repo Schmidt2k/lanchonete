@@ -14,7 +14,8 @@ class _AppCardapioViewState extends State<AppCardapioView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cardápio'),
+        backgroundColor: Colors.black,
+        title: Text('Lanchonete FEMA'),
       ),
       body: cardapio(),
     );
@@ -23,9 +24,34 @@ class _AppCardapioViewState extends State<AppCardapioView> {
   Widget cardapio() {
     return Column(
       children: [
-        clienteMesa(),
+        // clienteMesa(),
+        categorias(),
         listaLanches(),
       ],
+    );
+  }
+
+  Widget categorias() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Column(
+          children: [
+            CircleAvatar(
+              backgroundImage: AssetImage('assets/lanche.jpg'),
+              maxRadius: 40,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Lanches',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -54,8 +80,7 @@ class _AppCardapioViewState extends State<AppCardapioView> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       'MESA: ',
-                      style: TextStyle(
-                          fontWeight: FontWeight.normal, fontSize: 18.0),
+                      style: TextStyle(fontSize: 18.0),
                     ),
                   ),
                   Padding(
@@ -90,17 +115,53 @@ class _AppCardapioViewState extends State<AppCardapioView> {
 
   Widget listaLanches() {
     return Expanded(
-      child: ListView.builder(
-        itemCount: 3,
-        itemBuilder: (context, index) {
-          return Card(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(150)),
-            child: Image.asset(
-              'assets/lanche.jpg',
-            ),
-          );
-        },
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Colors.blue,
+              Colors.red,
+            ],
+          ),
+        ),
+        child: GridView.count(
+          crossAxisCount: 2,
+          shrinkWrap: true,
+          children: List.generate(1, (index) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                elevation: 2.0,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'X-TUDO',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18.0),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Image.asset(
+                        'assets/lanche.jpg',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }),
+        ),
       ),
     );
   }
