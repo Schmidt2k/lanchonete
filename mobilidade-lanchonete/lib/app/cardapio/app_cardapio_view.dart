@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lanchonete_faculdade/app/cardapio/app_cardapio_controller.dart';
+import 'package:lanchonete_faculdade/app/telas/app_telas.dart';
 
 class AppCardapioView extends StatefulWidget {
   @override
@@ -14,6 +15,13 @@ class _AppCardapioViewState extends State<AppCardapioView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              icon: Icon(Icons.point_of_sale),
+              onPressed: () {
+                Navigator.pushNamed(context, TELA_PEDIDOS_REALIZADOS);
+              })
+        ],
         backgroundColor: Colors.black,
         title: Text('Lanchonete FEMA'),
       ),

@@ -1,6 +1,6 @@
 class Pedidos {
   int idPedido;
-  int valorLanche;
+  double valorLanche;
   int idMesa;
   String nomeCliente;
   int idLanche;
