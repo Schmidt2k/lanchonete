@@ -218,7 +218,11 @@ class _AppCardapioViewState extends State<AppCardapioView> {
           Navigator.pushNamed(
             context,
             TELA_LANCHE_DETALHE,
-            arguments: {'lanche': item.titulo, 'imagem': item.imagem},
+            arguments: {
+              'lanche': item.titulo,
+              'imagem': item.imagem,
+              'valorLanche': item.valorLanche
+            },
           );
         },
         child: Card(

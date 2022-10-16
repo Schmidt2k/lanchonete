@@ -21,7 +21,9 @@ class _AppLancheDetalheViewState extends State<AppLancheDetalheView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text(arguments['lanche']),
+        title: Text(arguments['lanche'] +
+            " " +
+            "(R\$${arguments['valorLanche'].toStringAsFixed(2)})"),
       ),
       body: SingleChildScrollView(child: lanche(arguments['imagem'])),
     );
@@ -159,7 +161,12 @@ class _AppLancheDetalheViewState extends State<AppLancheDetalheView> {
               Expanded(
                   child: RaisedButton(
                 onPressed: () {},
-                child: Text('Adicionar'),
+                color: double.parse(_controller.text.trim()) > 0
+                    ? Colors.amber
+                    : null,
+                child: Text(
+                  'Adicionar',
+                ),
               ))
             ],
           ),
