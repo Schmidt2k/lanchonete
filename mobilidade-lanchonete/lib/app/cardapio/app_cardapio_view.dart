@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lanchonete_faculdade/app/cardapio/app_cardapio_controller.dart';
 import 'package:lanchonete_faculdade/app/telas/app_telas.dart';
 import 'package:lanchonete_faculdade/models/lanche.dart';
+import 'dart:async';
 
 class AppCardapioView extends StatefulWidget {
   @override
@@ -168,6 +169,7 @@ class _AppCardapioViewState extends State<AppCardapioView> {
         ),
         child: FutureBuilder<List<Lanche>>(
           future: listaLanche(),
+          initialData: [],
           builder: (context, index) {
             return ListView.builder(
               itemCount: index.data.length,
