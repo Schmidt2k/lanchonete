@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lanchonete_faculdade/app/cardapio/app_cardapio_controller.dart';
+import 'package:lanchonete_faculdade/app/pedidos/app_pedidos_realizados_view.dart';
 import 'package:lanchonete_faculdade/app/telas/app_telas.dart';
 import 'package:lanchonete_faculdade/models/lanche.dart';
 import 'dart:async';
@@ -14,24 +15,42 @@ class AppCardapioView extends StatefulWidget {
 class _AppCardapioViewState extends State<AppCardapioView> {
   final AppCardapioController _cardapioController =
       Modular.get<AppCardapioController>();
+  int indexPage = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: Icon(Icons.point_of_sale),
-            onPressed: () {
-              Navigator.pushNamed(context, TELA_PEDIDOS_REALIZADOS);
-            },
-          )
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: indexPage,
+        selectedItemColor: Colors.black,
+        onTap: (num) {
+          setState(() {
+            indexPage = num;
+            _pageController.animateToPage(num,
+                duration: Duration(milliseconds: 250),
+                curve: Curves.bounceInOut);
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.book_sharp), label: ("Cardápio")),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.point_of_sale), label: ("Pedidos")),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.exit_to_app), label: ("Sair")),
         ],
+      ),
+      appBar: AppBar(
         backgroundColor: Colors.black,
         title: Text('Lanchonete FEMA'),
       ),
-      body: cardapio(),
+      body: PageView(
+        controller: _pageController,
+        children: [cardapio(), AppPedidosRealizadosView()],
+      ),
     );
   }
+
+  final _pageController = PageController();
 
   Widget cardapio() {
     return Column(

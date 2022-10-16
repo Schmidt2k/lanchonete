@@ -17,10 +17,6 @@ class _AppPedidosRealizadosViewState extends State<AppPedidosRealizadosView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: Text('Pedidos Realizados'),
-      ),
       body: corpoPedidos(),
     );
   }
