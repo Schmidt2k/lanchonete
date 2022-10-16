@@ -1,92 +1,104 @@
 package com.example.demo.Entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="HE_PEDIDO")
 public class HePedido {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id_pedido;
+    @Column(name="id_pedido")
+	private Long idPedido;
+
+	@Column(name="id_mesa")
+	private Integer idMesa;
 	
-	private Integer id_mesa;
+	@Column(name="nome_cliente")
+	private String nomeCliente;
 	
-	private String nome_cliente;
+	@Column(name="id_lanche")
+	private Integer idLanche;
 	
-	private Integer id_lanche;
+	@Column(name="nome_lanche")
+	private String nomeLanche;
 	
-	private String nome_lanche;
+	@Column(name="qtd_lanche")
+	private Integer qtdLanche;
 	
-	private Integer qtd_lanche;
+	@Column(name="valor_lanche")
+	private Double valorLanche;
 	
-	private Double valor_lanche;
+	@Column(name="obs_lanche")
+	private String obsLanche;
 	
-	private String obs_lanche;
-
-	public Long getId_pedido() {
-		return id_pedido;
+	public Long getIdPedido() {
+		return idPedido;
 	}
 
-	public void setId_pedido(Long id_pedido) {
-		this.id_pedido = id_pedido;
+	public void setIdPedido(Long idPedido) {
+		this.idPedido = idPedido;
 	}
 
-	public Integer getId_mesa() {
-		return id_mesa;
+	public Integer getIdMesa() {
+		return idMesa;
 	}
 
-	public void setId_mesa(Integer id_mesa) {
-		this.id_mesa = id_mesa;
+	public void setIdMesa(Integer idMesa) {
+		this.idMesa = idMesa;
 	}
 
-	public String getNome_cliente() {
-		return nome_cliente;
+	public String getNomeCliente() {
+		return nomeCliente;
 	}
 
-	public void setNome_cliente(String nome_cliente) {
-		this.nome_cliente = nome_cliente;
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
 	}
 
-	public Integer getId_lanche() {
-		return id_lanche;
+	public Integer getIdLanche() {
+		return idLanche;
 	}
 
-	public void setId_lanche(Integer id_lanche) {
-		this.id_lanche = id_lanche;
+	public void setIdLanche(Integer idLanche) {
+		this.idLanche = idLanche;
 	}
 
-	public String getNome_lanche() {
-		return nome_lanche;
+	public String getNomeLanche() {
+		return nomeLanche;
 	}
 
-	public void setNome_lanche(String nome_lanche) {
-		this.nome_lanche = nome_lanche;
+	public void setNomeLanche(String nomeLanche) {
+		this.nomeLanche = nomeLanche;
 	}
 
-	public Integer getQtd_lanche() {
-		return qtd_lanche;
+	public Integer getQtdLanche() {
+		return qtdLanche;
 	}
 
-	public void setQtd_lanche(Integer qtd_lanche) {
-		this.qtd_lanche = qtd_lanche;
+	public void setQtdLanche(Integer qtdLanche) {
+		this.qtdLanche = qtdLanche;
 	}
 
-	public Double getValor_lanche() {
-		return valor_lanche;
+	public Double getValorLanche() {
+		return valorLanche;
 	}
 
-	public void setValor_lanche(Double valor_lanche) {
-		this.valor_lanche = valor_lanche;
+	public void setValorLanche(Double valorLanche) {
+		this.valorLanche = valorLanche;
 	}
 
-	public String getObs_lanche() {
-		return obs_lanche;
+	public String getObsLanche() {
+		return obsLanche;
 	}
 
-	public void setObs_lanche(String obs_lanche) {
-		this.obs_lanche = obs_lanche;
+	public void setObsLanche(String obsLanche) {
+		this.obsLanche = obsLanche;
 	}
+
 }

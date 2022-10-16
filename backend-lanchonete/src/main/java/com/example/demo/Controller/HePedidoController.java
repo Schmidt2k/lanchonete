@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.Entity.Funcionario;
 import com.example.demo.Entity.HePedido;
 import com.example.demo.Repository.HePedidoRepository;
 
@@ -28,20 +27,27 @@ public class HePedidoController {
 		return ResponseEntity.ok(resultado);
 	}
 	
-	@GetMapping("/recuperarHePedido/{id_pedido}")
-	public ResponseEntity<Optional<HePedido>> acessarHePedido(@PathVariable Long id_pedido) {
-		Optional<HePedido> resultado = hePedidoRepository.findById(id_pedido);
+	@GetMapping("/recuperarHePedido/{idPedido}")
+	public ResponseEntity<Optional<HePedido>> acessarHePedido(@PathVariable Long idPedido) {
+		Optional<HePedido> resultado = hePedidoRepository.findById(idPedido);
 		return ResponseEntity.ok(resultado);
 	}
+	
+	@GetMapping("/recuperarHePedido/mesa/{idMesa}")
+	public ResponseEntity<List<HePedido>> acessarHePedidoMesa(@PathVariable Integer idMesa) {
+		List<HePedido> resultado = hePedidoRepository.findByIdMesa(idMesa);
+		return ResponseEntity.ok(resultado);
+	}
+	
 	
 	@PostMapping("/inserirHePedido")
 	public ResponseEntity<HePedido> inserirHePedido(@RequestBody (required=true) HePedido hePedido) {
 		return ResponseEntity.ok(hePedidoRepository.save(hePedido));
 	}
 	
-	@DeleteMapping("/deletarHePedido/{id_pedido}")
-	public ResponseEntity<Long> deletarHePedido(@PathVariable Long id_pedido) {
-		hePedidoRepository.deleteById(id_pedido);
-		return ResponseEntity.ok(id_pedido);
+	@DeleteMapping("/deletarHePedido/{idPedido}")
+	public ResponseEntity<Long> deletarHePedido(@PathVariable Long idPedido) {
+		hePedidoRepository.deleteById(idPedido);
+		return ResponseEntity.ok(idPedido);
 	}
 }

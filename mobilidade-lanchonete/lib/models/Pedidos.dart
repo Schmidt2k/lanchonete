@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class Pedidos {
   int idPedido;
   double valorLanche;
@@ -8,37 +10,46 @@ class Pedidos {
   int qtdLanche;
   String obsLanche;
 
-  Pedidos(
-      {this.idPedido,
-      this.valorLanche,
-      this.idMesa,
-      this.nomeCliente,
-      this.idLanche,
-      this.nomeLanche,
-      this.qtdLanche,
-      this.obsLanche});
+  Pedidos({
+    this.idPedido,
+    this.valorLanche,
+    this.idMesa,
+    this.nomeCliente,
+    this.idLanche,
+    this.nomeLanche,
+    this.qtdLanche,
+    this.obsLanche,
+  });
 
-  Pedidos.fromJson(Map<String, dynamic> json) {
-    idPedido = json['id_pedido'];
-    valorLanche = json['valor_lanche'];
-    idMesa = json['id_mesa'];
-    nomeCliente = json['nome_cliente'];
-    idLanche = json['id_lanche'];
-    nomeLanche = json['nome_lanche'];
-    qtdLanche = json['qtd_lanche'];
-    obsLanche = json['obs_lanche'];
+  factory Pedidos.fromJson(Map<String, dynamic> json) => Pedidos(
+        idPedido: json['idPedido'],
+        valorLanche: json['valorLanche'],
+        idMesa: json['idMesa'],
+        nomeCliente: json['nomeCliente'],
+        idLanche: json['idLanche'],
+        nomeLanche: json['nomeLanche'],
+        qtdLanche: json['qtdLanche'],
+        obsLanche: json['obsLanche'],
+      );
+
+  static List<Pedidos> listPedidos(List<Map<String, dynamic>> map) {
+    List<Pedidos> ltPedidos = [];
+    for (var pedidos in map) {
+      ltPedidos.add(Pedidos.fromJson(pedidos));
+    }
+    return ltPedidos;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id_pedido'] = this.idPedido;
-    data['valor_lanche'] = this.valorLanche;
-    data['id_mesa'] = this.idMesa;
-    data['nome_cliente'] = this.nomeCliente;
-    data['id_lanche'] = this.idLanche;
-    data['nome_lanche'] = this.nomeLanche;
-    data['qtd_lanche'] = this.qtdLanche;
-    data['obs_lanche'] = this.obsLanche;
+    data['idPedido'] = this.idPedido;
+    data['valorLanche'] = this.valorLanche;
+    data['idMesa'] = this.idMesa;
+    data['nomeCliente'] = this.nomeCliente;
+    data['idLanche'] = this.idLanche;
+    data['nomeLanche'] = this.nomeLanche;
+    data['qtdLanche'] = this.qtdLanche;
+    data['obsLanche'] = this.obsLanche;
     return data;
   }
 }
