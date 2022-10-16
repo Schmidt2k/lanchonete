@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+
 import { Component, OnInit } from '@angular/core';
 import { HePedidos } from '../models/he-pedidos';
 import { HePedidosService } from '../services/he-pedidos.service';
@@ -9,20 +9,23 @@ import { HePedidosService } from '../services/he-pedidos.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
-  hePedido = {} as HePedidos;
-  pedidos!: HePedidos[];
-  readonly apiURL : string;
   
-  constructor(private http : HttpClient) {
-    this.apiURL = 'http://localhost:8080';
-   }
+  hePedidos?: HePedidos[];
+
+
+  constructor(private hePedidosService: HePedidosService) {}
   
   ngOnInit(): void {
+    this.getAllHePedidos();
   }
 
-  getAllHePedidos() {
-    this.http.get(`${this.apiURL}/recuperarHePedido`).subscribe(resultado => console.log(resultado));
+  getAllHePedidos(): void {
+   this.hePedidosService.getAll().subscribe({
+    next: (data) => {
+      this.hePedidos = data;
+      console.log(data);
+    },
+    error: (e) => console.error(e)
+   });
   }
-
 }

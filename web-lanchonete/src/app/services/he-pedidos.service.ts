@@ -1,24 +1,40 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+
+import {  Observable, throwError } from 'rxjs';
+import { retry, catchError } from 'rxjs/operators';
 import { HePedidos } from '../models/he-pedidos';
+
+const apiUrl = 'http://localhost:8080/api/pedidos/recuperarHePedido';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HePedidosService {
 
-  apiUrl = 'http://localhost:8080';
 
-  constructor(
-    private httpClient:HttpClient
-    ) { }
 
-    httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  constructor(private http:HttpClient) { }
+
+  getAll(): Observable<HePedidos[]> {
+    return this.http.get<HePedidos[]>(apiUrl);
+  }
+
+    handleError(error: HttpErrorResponse) {
+      let errorMessage = 'Unknown error!';
+      if (error.error instanceof ErrorEvent) {
+        // Client-side errors
+        errorMessage = `Error: ${error.error.message}`;
+      } else {
+        // Server-side errors
+        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      }
+      window.alert(errorMessage);
+      return throwError(errorMessage);
     }
 
-  getAllHePedidos() {
-    return this.httpClient.get(`${this.apiUrl}/recuperarHePedido`).subscribe(resultado => console.log(resultado));
-  }
+    public sendGetRequest(){
+      return this.http.get(apiUrl).pipe(retry(3), catchError(this.handleError));
+
+    }
 }

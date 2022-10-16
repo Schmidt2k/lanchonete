@@ -34,6 +34,9 @@ const routes: Routes = [
   {
     path: 'settings', component: SettingsComponent
   },
+  {
+    path: 'login', component: LoginComponent
+  },
   
 ];
 
