@@ -12,11 +12,13 @@ export class DashboardComponent implements OnInit {
   
   hePedidos?: HePedidos[];
 
-
   constructor(private hePedidosService: HePedidosService) {}
   
   ngOnInit(): void {
-    this.getAllHePedidos();
+    
+    window.setInterval(() =>{
+      this.getAllHePedidos();
+    }, 1000);
   }
 
   getAllHePedidos(): void {
@@ -28,4 +30,6 @@ export class DashboardComponent implements OnInit {
     error: (e) => console.error(e)
    });
   }
+
+  
 }
