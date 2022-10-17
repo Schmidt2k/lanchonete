@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:lanchonete_faculdade/app/login/app_login_usuario_controller.dart';
+import 'package:lanchonete_faculdade/app/login/app_login_usuario_view.dart';
 import 'package:lanchonete_faculdade/app/telas/app_telas.dart';
 import 'package:lanchonete_faculdade/app/cardapio/app_cardapio_controller.dart';
 import 'package:lanchonete_faculdade/app/cardapio/app_cardapio_view.dart';
@@ -14,7 +16,8 @@ class AppModule extends MainModule {
   List<Bind> get binds => [
         Bind((i) => AppCardapioController()),
         Bind((i) => AppLancheDetalheController()),
-        Bind((i) => AppPedidosRealizadosController())
+        Bind((i) => AppPedidosRealizadosController()),
+        Bind((i) => AppLoginUsuarioController())
       ];
 
   @override
@@ -24,6 +27,8 @@ class AppModule extends MainModule {
             child: (_, args) => AppLancheDetalheView()),
         ModularRouter(TELA_PEDIDOS_REALIZADOS,
             child: (_, args) => AppPedidosRealizadosView()),
+        ModularRouter(TELA_LOGIN_USUARIO,
+            child: (_, args) => AppLoginUsuarioView()),
       ];
 
   @override

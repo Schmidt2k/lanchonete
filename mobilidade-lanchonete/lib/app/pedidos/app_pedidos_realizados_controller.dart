@@ -9,10 +9,12 @@ class AppPedidosRealizadosController {
   Stream<List<Pedidos>> getPedidos() async* {
     while (true) {
       final response = await http.get(
-          Uri.parse('http://192.168.0.109:8080/recuperarHePedido/mesa/$mesa'));
+        Uri.parse('http://192.168.0.109:8080/recuperarHePedido/mesa/$mesa'),
+      );
       if (response.statusCode == 200) {
         await Future.delayed(Duration(seconds: 1));
-        yield Pedidos.listPedidos(json.decode(response.body).toList());
+        yield Pedidos.listPedidos(
+            json.decode(utf8.decode(response.bodyBytes)).toList());
       } else {
         throw Exception('falha ao carregar pedidos');
       }

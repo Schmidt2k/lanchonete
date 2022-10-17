@@ -36,12 +36,29 @@ class _AppPedidosRealizadosViewState extends State<AppPedidosRealizadosView> {
       color: Colors.black,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'TOTAL:',
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-          ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'TOTAL:',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  'Finalizado',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.green),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -130,7 +147,19 @@ class _AppPedidosRealizadosViewState extends State<AppPedidosRealizadosView> {
               ));
             }
             if (stream.hasError) {
-              return const Text('Error:');
+              return SizedBox(
+                  width: double.maxFinite,
+                  height: double.maxFinite,
+                  child: Center(
+                    child: Text(
+                      'Não foi possível carregar os pedidos\n:(',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 15.0,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ));
             } else if (stream.hasData) {
               return ListView.builder(
                   itemCount: stream.data.length,

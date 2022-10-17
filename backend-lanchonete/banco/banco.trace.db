@@ -1871,3 +1871,37 @@ imagem varchar,
 titulo varchar,
 valor_lanche double
 ) [42001-210]
+2022-10-17 11:41:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Unknown data type: "PRIMARY"; SQL statement:
+create table USUARIO_MOBILE(
+id_usuario_mobile primary key auto_increment,
+nome_usuario_mobile varchar,
+senha_usuario_mobile int
+) [50004-210]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:573)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:496)
+	at org.h2.message.DbException.get(DbException.java:227)
+	at org.h2.message.DbException.get(DbException.java:203)
+	at org.h2.command.Parser.readIfDataType1(Parser.java:6234)
+	at org.h2.command.Parser.readIfDataType(Parser.java:6075)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:6057)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:5932)
+	at org.h2.command.Parser.parseTableColumnDefinition(Parser.java:9360)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:9298)
+	at org.h2.command.Parser.parseCreate(Parser.java:6779)
+	at org.h2.command.Parser.parsePrepared(Parser.java:746)
+	at org.h2.command.Parser.parse(Parser.java:674)
+	at org.h2.command.Parser.parse(Parser.java:644)
+	at org.h2.command.Parser.prepareCommand(Parser.java:551)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:615)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:553)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:237)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1339)
+	at org.h2.server.web.WebApp.query(WebApp.java:1137)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1103)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1090)
+	at org.h2.server.web.WebThread.process(WebThread.java:189)
+	at org.h2.server.web.WebThread.run(WebThread.java:102)
+	at java.lang.Thread.run(Unknown Source)
