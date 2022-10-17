@@ -5,7 +5,6 @@ import 'package:lanchonete_faculdade/app/cardapio/app_cardapio_controller.dart';
 import 'package:lanchonete_faculdade/app/pedidos/app_pedidos_realizados_view.dart';
 import 'package:lanchonete_faculdade/app/telas/app_telas.dart';
 import 'package:lanchonete_faculdade/models/lanche.dart';
-import 'dart:async';
 
 class AppCardapioView extends StatefulWidget {
   @override
@@ -13,6 +12,12 @@ class AppCardapioView extends StatefulWidget {
 }
 
 class _AppCardapioViewState extends State<AppCardapioView> {
+  @override
+  void initState() {
+    super.initState();
+    _cardapioController.teste();
+  }
+
   final AppCardapioController _cardapioController =
       Modular.get<AppCardapioController>();
   int indexPage = 0;
@@ -186,10 +191,16 @@ class _AppCardapioViewState extends State<AppCardapioView> {
             ],
           ),
         ),
-        child: FutureBuilder<List<Lanche>>(
-          future: listaLanche(),
+        child: StreamBuilder<List<Lanche>>(
+          stream: _cardapioController.listaLanche(),
           initialData: [],
           builder: (context, index) {
+            if (index.connectionState == ConnectionState.waiting) {
+              return Center(
+                  child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              ));
+            }
             return ListView.builder(
               itemCount: index.data.length,
               itemBuilder: (context, item) {
@@ -200,14 +211,6 @@ class _AppCardapioViewState extends State<AppCardapioView> {
         ),
       ),
     );
-  }
-
-  Future<List<Lanche>> listaLanche() async {
-    List<Lanche> items = [
-      Lanche('assets/x-salada.jpg', 'X-Salada', 12.50),
-      Lanche('assets/x-tudo.jpg', 'X-Tudo', 18.99),
-    ];
-    return items;
   }
 
   Widget lancheSelecionado(Lanche item) {
@@ -221,7 +224,8 @@ class _AppCardapioViewState extends State<AppCardapioView> {
             arguments: {
               'lanche': item.titulo,
               'imagem': item.imagem,
-              'valorLanche': item.valorLanche
+              'valorLanche': item.valorLanche,
+              'ingredientes': item.ingredientes,
             },
           );
         },
@@ -244,7 +248,7 @@ class _AppCardapioViewState extends State<AppCardapioView> {
                   ),
                 ),
               ),
-              Image.asset(
+              Image.network(
                 item.imagem,
                 fit: BoxFit.fill,
               ),

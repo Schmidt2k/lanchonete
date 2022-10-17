@@ -26,7 +26,24 @@ class _AppPedidosRealizadosViewState extends State<AppPedidosRealizadosView> {
       children: [
         clienteMesa(),
         listaPedidos(),
+        valorTotal(),
       ],
+    );
+  }
+
+  Widget valorTotal() {
+    return Container(
+      color: Colors.black,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'TOTAL:',
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+        ),
+      ),
     );
   }
 
@@ -91,29 +108,76 @@ class _AppPedidosRealizadosViewState extends State<AppPedidosRealizadosView> {
 
   Widget listaPedidos() {
     return Expanded(
-      child: StreamBuilder<List<Pedidos>>(
-        stream: _pedidosRealizadosController.getPedidos(),
-        builder: (context, stream) {
-          if (stream.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          }
-          if (stream.hasError) {
-            return const Text('Error:');
-          } else if (stream.hasData) {
-            return Text(stream.data.first.nomeCliente);
-            // return ListView.builder(
-            //     itemCount: _pedidosRealizadosController.ltResult.length,
-            //     itemBuilder: (context, index) {
-            //       return Text(_pedidosRealizadosController
-            //                   .ltResult[index].nomeCliente !=
-            //               null
-            //           ? _pedidosRealizadosController.ltResult[index].nomeCliente
-            //           : "teste");
-            //     });
-          } else {
-            return const Text('Empty data');
-          }
-        },
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Colors.blue,
+              Colors.red,
+            ],
+          ),
+        ),
+        child: StreamBuilder<List<Pedidos>>(
+          stream: _pedidosRealizadosController.getPedidos(),
+          initialData: [],
+          builder: (context, stream) {
+            if (stream.connectionState == ConnectionState.waiting) {
+              return Center(
+                  child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              ));
+            }
+            if (stream.hasError) {
+              return const Text('Error:');
+            } else if (stream.hasData) {
+              return ListView.builder(
+                  itemCount: stream.data.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      elevation: 2.0,
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  stream.data[index].nomeLanche,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  "R\$ ${stream.data[index].valorLanche.toStringAsFixed(2)}",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  });
+            } else {
+              return const Text('Empty data');
+            }
+          },
+        ),
       ),
     );
   }

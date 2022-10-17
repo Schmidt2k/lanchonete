@@ -25,28 +25,18 @@ class _AppLancheDetalheViewState extends State<AppLancheDetalheView> {
             " " +
             "(R\$${arguments['valorLanche'].toStringAsFixed(2)})"),
       ),
-      body: SingleChildScrollView(child: lanche(arguments['imagem'])),
+      body: SingleChildScrollView(
+          child: lanche(arguments['imagem'], arguments['ingredientes'])),
     );
   }
 
-  List<String> ingredientes = [
-    'Alface',
-    'Hamburger',
-    'Cheddar',
-    'Tomate',
-    'Pão de Hamburger',
-    'Maionese',
-    'Catchup',
-    'Cebola',
-  ];
-
-  Widget lanche(String imagem) {
+  Widget lanche(String imagem, String ingredientes) {
     return Column(
       children: [
         imagemLanche(imagem),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: corpoLanche(),
+          child: corpoLanche(ingredientes),
         )
       ],
     );
@@ -56,7 +46,7 @@ class _AppLancheDetalheViewState extends State<AppLancheDetalheView> {
     return SizedBox(
       height: 220,
       width: double.maxFinite,
-      child: Image.asset(
+      child: Image.network(
         imagem,
         fit: BoxFit.fill,
       ),
@@ -65,7 +55,10 @@ class _AppLancheDetalheViewState extends State<AppLancheDetalheView> {
 
   TextEditingController _controller = TextEditingController();
 
-  Widget corpoLanche() {
+  Widget corpoLanche(String ingredientes) {
+    List<String> ltIngredientes = ingredientes != null
+        ? ingredientes.split(', ')
+        : ["Sem ingredientes cadastrados"];
     return Column(
       children: [
         Padding(
@@ -126,8 +119,8 @@ class _AppLancheDetalheViewState extends State<AppLancheDetalheView> {
                                         int.parse(_controller.text);
                                     setState(() {
                                       currentValue++;
-                                      _controller.text = (currentValue)
-                                          .toString(); // incrementing value
+                                      _controller.text =
+                                          (currentValue).toString();
                                     });
                                   },
                                 ),
@@ -142,7 +135,6 @@ class _AppLancheDetalheViewState extends State<AppLancheDetalheView> {
                                   int currentValue =
                                       int.parse(_controller.text);
                                   setState(() {
-                                    print("Setting state");
                                     currentValue--;
                                     _controller.text =
                                         (currentValue > 0 ? currentValue : 0)
@@ -186,12 +178,12 @@ class _AppLancheDetalheViewState extends State<AppLancheDetalheView> {
                 ),
               ),
               ListView.builder(
-                padding: EdgeInsets.only(left: 25.00, top: 10.00),
+                padding: EdgeInsets.only(left: 10.00, top: 10.00),
                 shrinkWrap: true,
-                itemCount: ingredientes.length,
+                itemCount: ltIngredientes.length,
                 itemBuilder: (context, index) {
                   return Text(
-                    '•    ${ingredientes[index].splitMapJoin(',')}',
+                    '•    ${ltIngredientes[index]}',
                     style: TextStyle(
                       fontSize: 18.0,
                     ),

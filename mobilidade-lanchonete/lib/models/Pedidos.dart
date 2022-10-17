@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 class Pedidos {
   int idPedido;
   double valorLanche;
@@ -32,9 +30,9 @@ class Pedidos {
         obsLanche: json['obsLanche'],
       );
 
-  static List<Pedidos> listPedidos(List<Map<String, dynamic>> map) {
+  static List<Pedidos> listPedidos(List list) {
     List<Pedidos> ltPedidos = [];
-    for (var pedidos in map) {
+    for (var pedidos in list) {
       ltPedidos.add(Pedidos.fromJson(pedidos));
     }
     return ltPedidos;
