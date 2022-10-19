@@ -41,7 +41,7 @@ class _AppCardapioViewState extends State<AppCardapioView> {
       ),
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text('Lanchonete FEMA'),
+        title: Text('Lanchonete'),
       ),
       body: PageView(
         physics: NeverScrollableScrollPhysics(),

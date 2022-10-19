@@ -79,19 +79,41 @@ class _AppLoginUsuarioViewState extends State<AppLoginUsuarioView> {
                     barrierDismissible: false,
                     builder: (BuildContext context) {
                       return AlertDialog(
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(32.0))),
                         title: Row(
                           children: [
                             Icon(
                               Icons.error,
                               color: Colors.red,
                             ),
-                            Text('Dados inválidos'),
+                            Text(
+                              '  Dados inválidos',
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ],
                         ),
-                        content: Text('Usuário ou senha inválidos!'),
+                        content: Text(
+                          'Usuário ou senha inválidos!',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         actions: <Widget>[
                           TextButton(
-                            child: const Text('Entendido'),
+                            child: const Text(
+                              'Entendido!',
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             onPressed: () {
                               Navigator.of(context).pop();
                             },

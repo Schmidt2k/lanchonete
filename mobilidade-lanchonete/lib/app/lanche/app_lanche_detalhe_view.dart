@@ -56,11 +56,54 @@ class _AppLancheDetalheViewState extends State<AppLancheDetalheView> {
   TextEditingController _controller = TextEditingController();
 
   Widget corpoLanche(String ingredientes) {
-    List<String> ltIngredientes = ingredientes != null
-        ? ingredientes.split(', ')
-        : ["Sem ingredientes cadastrados"];
+    // List<String> ltIngredientes = ingredientes != null
+    //     ? ingredientes.split(', ')
+    //     : ["Sem ingredientes cadastrados"];
     return Column(
       children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Ingredientes:',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  ingredientes == null
+                      ? 'Sem ingredientes cadastrados, informe ao estabelecimento.'
+                      : ingredientes,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+
+              // ListView.builder(
+              //   padding: EdgeInsets.only(left: 10.00, top: 10.00),
+              //   shrinkWrap: true,
+              //   itemCount: ltIngredientes.length,
+              //   itemBuilder: (context, index) {
+              //     return Text(
+              //       '•    ${ltIngredientes[index]}',
+              //       style: TextStyle(
+              //         fontSize: 18.0,
+              //       ),
+              //     );
+              //   },
+              // ),
+            ],
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
@@ -151,46 +194,27 @@ class _AppLancheDetalheViewState extends State<AppLancheDetalheView> {
                 ),
               ),
               Expanded(
-                  child: RaisedButton(
-                onPressed: () {},
-                color: double.parse(_controller.text.trim()) > 0
-                    ? Colors.amber
-                    : null,
-                child: Text(
-                  'Adicionar',
+                child: RaisedButton(
+                  onPressed: () {},
+                  color: double.parse(_controller.text.trim()) > 0
+                      ? Colors.amber
+                      : null,
+                  child: Text(
+                    'Adicionar'.toUpperCase(),
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ))
+              ),
             ],
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Ingredientes:',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              ListView.builder(
-                padding: EdgeInsets.only(left: 10.00, top: 10.00),
-                shrinkWrap: true,
-                itemCount: ltIngredientes.length,
-                itemBuilder: (context, index) {
-                  return Text(
-                    '•    ${ltIngredientes[index]}',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                    ),
-                  );
-                },
-              ),
-            ],
+          child: TextFormField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Observação',
+            ),
           ),
         ),
       ],

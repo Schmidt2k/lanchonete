@@ -1,11 +1,10 @@
 package com.example.demo.Entity;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -38,6 +37,9 @@ public class HePedido {
 	@Column(name="obs_lanche")
 	private String obsLanche;
 	
+//	@Query(value = "SELECT * FROM ITEM_PEDIDO i WHERE i.id_cliente = idCliente", nativeQuery = true)
+//	List<ItemPedido> ltItensPedidos;
+//	
 	public BigDecimal getIdPedido() {
 		return idPedido;
 	}

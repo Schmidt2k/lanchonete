@@ -6,8 +6,6 @@ import 'package:http/http.dart' as http;
 import 'package:lanchonete_faculdade/models/Usuario.dart';
 
 class AppPedidosRealizadosController {
-  String mesa = '1';
-  var mesas = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
   Stream<List<Pedidos>> getPedidos(Usuario usuario) async* {
     while (true) {
       final response = await http.get(

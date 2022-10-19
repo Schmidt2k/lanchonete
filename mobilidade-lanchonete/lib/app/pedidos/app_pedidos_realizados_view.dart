@@ -55,9 +55,9 @@ class _AppPedidosRealizadosViewState extends State<AppPedidosRealizadosView> {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  'Finalizado',
+                  'Aguard. produção',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.green),
+                      fontWeight: FontWeight.bold, color: Colors.amber),
                 ),
               ),
             ),
@@ -67,64 +67,64 @@ class _AppPedidosRealizadosViewState extends State<AppPedidosRealizadosView> {
     );
   }
 
-  Widget clienteMesa() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Form(
-        child: Row(children: [
-          Expanded(
-              child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-                decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              prefixIcon: Icon(Icons.person),
-              hintText: 'Cliente',
-              labelText: 'Cliente',
-            )),
-          )),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'MESA: ',
-                      style: TextStyle(fontSize: 18.0),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: DropdownButton(
-                      value: _pedidosRealizadosController.mesa,
-                      icon: const Icon(Icons.keyboard_arrow_down),
-                      items: _pedidosRealizadosController.mesas
-                          .map((String items) {
-                        return DropdownMenuItem(
-                          value: items,
-                          child: Text(
-                            items,
-                            style: TextStyle(fontSize: 18.0),
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (String value) {
-                        setState(() {
-                          _pedidosRealizadosController.mesa = value;
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
-        ]),
-      ),
-    );
-  }
+  // Widget clienteMesa() {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(8.0),
+  //     child: Form(
+  //       child: Row(children: [
+  //         Expanded(
+  //             child: Padding(
+  //           padding: const EdgeInsets.all(8.0),
+  //           child: TextFormField(
+  //               decoration: InputDecoration(
+  //             border: OutlineInputBorder(),
+  //             prefixIcon: Icon(Icons.person),
+  //             hintText: 'Cliente',
+  //             labelText: 'Cliente',
+  //           )),
+  //         )),
+  //         Expanded(
+  //           child: Padding(
+  //             padding: const EdgeInsets.all(8.0),
+  //             child: Row(
+  //               children: [
+  //                 Padding(
+  //                   padding: const EdgeInsets.all(8.0),
+  //                   child: Text(
+  //                     'MESA: ',
+  //                     style: TextStyle(fontSize: 18.0),
+  //                   ),
+  //                 ),
+  //                 Padding(
+  //                   padding: const EdgeInsets.all(8.0),
+  //                   child: DropdownButton(
+  //                     value: _pedidosRealizadosController.mesa,
+  //                     icon: const Icon(Icons.keyboard_arrow_down),
+  //                     items: _pedidosRealizadosController.mesas
+  //                         .map((String items) {
+  //                       return DropdownMenuItem(
+  //                         value: items,
+  //                         child: Text(
+  //                           items,
+  //                           style: TextStyle(fontSize: 18.0),
+  //                         ),
+  //                       );
+  //                     }).toList(),
+  //                     onChanged: (String value) {
+  //                       setState(() {
+  //                         _pedidosRealizadosController.mesa = value;
+  //                       });
+  //                     },
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         )
+  //       ]),
+  //     ),
+  //   );
+  // }
 
   Widget listaPedidos() {
     return Expanded(
@@ -172,38 +172,77 @@ class _AppPedidosRealizadosViewState extends State<AppPedidosRealizadosView> {
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  stream.data[index].nomeLanche,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16.0,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: ListTile(
+                              leading: IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.delete_forever_sharp,
+                                  color: Colors.redAccent[700],
+                                ),
+                              ),
+                              title: Text(stream.data[index].nomeLanche),
+                              subtitle: Text(
+                                  "R\$ ${stream.data[index].valorLanche.toStringAsFixed(2)}"),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                height: 35,
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Observação',
                                   ),
                                 ),
                               ),
                             ),
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: Text(
-                                  "R\$ ${stream.data[index].valorLanche.toStringAsFixed(2)}",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16.0,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     );
+
+                    // Card(
+                    //   elevation: 2.0,
+                    //   clipBehavior: Clip.antiAliasWithSaveLayer,
+                    //   shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(10)),
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.all(8.0),
+                    //     child: Row(
+                    //       children: [
+                    //         Expanded(
+                    //           child: Align(
+                    //             alignment: Alignment.centerLeft,
+                    //             child: Text(
+                    //               stream.data[index].nomeLanche,
+                    //               style: TextStyle(
+                    //                 fontWeight: FontWeight.bold,
+                    //                 fontSize: 16.0,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ),
+                    //         Expanded(
+                    //           child: Align(
+                    //             alignment: Alignment.centerRight,
+                    //             child: Text(
+                    //               "R\$ ${stream.data[index].valorLanche.toStringAsFixed(2)}",
+                    //               style: TextStyle(
+                    //                 fontWeight: FontWeight.bold,
+                    //                 fontSize: 16.0,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // );
                   });
             } else {
               return const Text('Empty data');

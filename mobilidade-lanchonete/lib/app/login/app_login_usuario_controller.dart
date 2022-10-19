@@ -16,6 +16,7 @@ class AppLoginUsuarioController {
       int senha = int.parse(txtSenha.text.toString().trim());
       final response = await http.get(Uri.parse(
           URL_BASE + 'loginUsuarioMobile/usuario/$usuario/senha/$senha'));
+      print(response.body);
       if (response.statusCode == 200) {
         if (response.body.isNotEmpty) {
           user = Usuario.fromJson(json.decode(response.body));

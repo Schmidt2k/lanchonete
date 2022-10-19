@@ -22,7 +22,18 @@ public class UsuarioMobile {
 	    @Column(name="senha_usuario_mobile")
 		private int senhaUsuarioMobile;
 	    
-	    public Integer getIdUsuarioMobile() {
+	    @Column(name="status_login_usuario")
+		private String statusLoginUsuario;
+	    
+	    public String getStatusLoginUsuario() {
+			return statusLoginUsuario;
+		}
+
+		public void setStatusLoginUsuario(String statusLoginUsuario) {
+			this.statusLoginUsuario = statusLoginUsuario;
+		}
+
+		public Integer getIdUsuarioMobile() {
 			return idUsuarioMobile;
 		}
 

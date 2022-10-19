@@ -47,6 +47,10 @@ public class UsuarioMobileController {
 	@GetMapping("/loginUsuarioMobile/usuario/{nomeUsuarioMobile}/senha/{senhaUsuarioMobile}")
 	public ResponseEntity<UsuarioMobile> loginUsuarioMobile(@PathVariable String nomeUsuarioMobile, @PathVariable Integer senhaUsuarioMobile) {
 		UsuarioMobile resultado = usuarioMobileRepository.findByNomeUsuarioMobileAndSenhaUsuarioMobile(nomeUsuarioMobile, senhaUsuarioMobile);
+		if(resultado!=null) {
+			resultado.setStatusLoginUsuario("Online");
+			usuarioMobileRepository.save(resultado);
+		}
 		return ResponseEntity.ok(resultado);
 	}
 	
