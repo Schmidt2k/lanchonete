@@ -1,5 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalInsertLancheComponent } from '../alert-modal/modal-insert-lanche/modal-insert-lanche.component';
 import { HePedidos } from '../models/he-pedidos';
 import { HePedidosService } from '../services/he-pedidos.service';
 
@@ -12,7 +14,7 @@ export class DashboardComponent implements OnInit {
   
   hePedidos?: HePedidos[];
 
-  constructor(private hePedidosService: HePedidosService) {}
+  constructor(private hePedidosService: HePedidosService, private modalInsertLancheComponent: ModalInsertLancheComponent, public ngbModal: NgbModal) {}
   
   ngOnInit(): void {
     
@@ -29,6 +31,10 @@ export class DashboardComponent implements OnInit {
     },
     error: (e) => console.error(e)
    });
+  }
+
+  abrirModalInsertLanche(){
+    this.ngbModal.open(ModalInsertLancheComponent)
   }
 
   

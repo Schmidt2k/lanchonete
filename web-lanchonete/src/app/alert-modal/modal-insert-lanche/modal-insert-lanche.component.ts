@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Lanche } from 'src/app/models/lanche';
 
 @Component({
   selector: 'app-modal-insert-lanche',
@@ -8,22 +9,13 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModalInsertLancheComponent implements OnInit {
 
-  @Input() title!: string;
-  @Input() msg!: string;
-  @Input() btnCancel = 'Cancelar';
-  @Input() btnCriar = 'Criar ';
+  @Input() lanche!: Lanche;
   
-  constructor(public activeModal: NgbActiveModal) { }
+  constructor(public ngbModal: NgbModal) { }
 
   ngOnInit(): void {
   }
 
-  onConfirm(){
-
-  }
-
-  onClose(){
-    //this.bsModalRef.hide();
-  }
+  
 
 }
