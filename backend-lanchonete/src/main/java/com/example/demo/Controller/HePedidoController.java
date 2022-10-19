@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,14 +33,14 @@ public class HePedidoController {
 	}
 	
 	@GetMapping("/recuperarHePedido/{idPedido}")
-	public ResponseEntity<Optional<HePedido>> acessarHePedido(@PathVariable Long idPedido) {
+	public ResponseEntity<Optional<HePedido>> acessarHePedido(@PathVariable BigDecimal idPedido) {
 		Optional<HePedido> resultado = hePedidoRepository.findById(idPedido);
 		return ResponseEntity.ok(resultado);
 	}
 	
-	@GetMapping("/recuperarHePedido/mesa/{idMesa}")
-	public ResponseEntity<List<HePedido>> acessarHePedidoMesa(@PathVariable Integer idMesa) {
-		List<HePedido> resultado = hePedidoRepository.findByIdMesa(idMesa);
+	@GetMapping("/recuperarHePedido/idCliente/{idCliente}")
+	public ResponseEntity<List<HePedido>> acessarHePedidoMesa(@PathVariable Integer idCliente) {
+		List<HePedido> resultado = hePedidoRepository.findByIdCliente(idCliente);
 		return ResponseEntity.ok(resultado);
 	}
 	
@@ -50,7 +51,7 @@ public class HePedidoController {
 	}
 	
 	@DeleteMapping("/deletarHePedido/{idPedido}")
-	public ResponseEntity<Long> deletarHePedido(@PathVariable Long idPedido) {
+	public ResponseEntity<BigDecimal> deletarHePedido(@PathVariable BigDecimal idPedido) {
 		hePedidoRepository.deleteById(idPedido);
 		return ResponseEntity.ok(idPedido);
 	}

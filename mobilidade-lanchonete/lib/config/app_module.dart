@@ -22,13 +22,12 @@ class AppModule extends MainModule {
 
   @override
   List<ModularRouter> get routers => [
-        ModularRouter('/', child: (_, args) => AppCardapioView()),
+        ModularRouter(TELA_CARDAPIO, child: (_, args) => AppCardapioView()),
         ModularRouter(TELA_LANCHE_DETALHE,
             child: (_, args) => AppLancheDetalheView()),
         ModularRouter(TELA_PEDIDOS_REALIZADOS,
             child: (_, args) => AppPedidosRealizadosView()),
-        ModularRouter(TELA_LOGIN_USUARIO,
-            child: (_, args) => AppLoginUsuarioView()),
+        ModularRouter('/', child: (_, args) => AppLoginUsuarioView()),
       ];
 
   @override

@@ -3,8 +3,11 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lanchonete_faculdade/app/pedidos/app_pedidos_realizados_controller.dart';
 import 'package:lanchonete_faculdade/models/Pedidos.dart';
+import 'package:lanchonete_faculdade/models/Usuario.dart';
 
 class AppPedidosRealizadosView extends StatefulWidget {
+  final Usuario usuario;
+  AppPedidosRealizadosView({this.usuario});
   @override
   State<AppPedidosRealizadosView> createState() =>
       _AppPedidosRealizadosViewState();
@@ -24,7 +27,7 @@ class _AppPedidosRealizadosViewState extends State<AppPedidosRealizadosView> {
   Widget corpoPedidos() {
     return Column(
       children: [
-        clienteMesa(),
+        // clienteMesa(),
         listaPedidos(),
         valorTotal(),
       ],
@@ -137,7 +140,7 @@ class _AppPedidosRealizadosViewState extends State<AppPedidosRealizadosView> {
           ),
         ),
         child: StreamBuilder<List<Pedidos>>(
-          stream: _pedidosRealizadosController.getPedidos(),
+          stream: _pedidosRealizadosController.getPedidos(widget.usuario),
           initialData: [],
           builder: (context, stream) {
             if (stream.connectionState == ConnectionState.waiting) {

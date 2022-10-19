@@ -1,5 +1,7 @@
 package com.example.demo.Entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,12 +14,11 @@ import javax.persistence.Table;
 public class HePedido {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id_pedido")
-	private Long idPedido;
-
-	@Column(name="id_mesa")
-	private Integer idMesa;
+	private BigDecimal idPedido;
+	
+	@Column(name="id_cliente")
+	private Integer idCliente;
 	
 	@Column(name="nome_cliente")
 	private String nomeCliente;
@@ -37,20 +38,16 @@ public class HePedido {
 	@Column(name="obs_lanche")
 	private String obsLanche;
 	
-	public Long getIdPedido() {
+	public BigDecimal getIdPedido() {
 		return idPedido;
 	}
 
-	public void setIdPedido(Long idPedido) {
-		this.idPedido = idPedido;
+	public Integer getIdCliente() {
+		return idCliente;
 	}
 
-	public Integer getIdMesa() {
-		return idMesa;
-	}
-
-	public void setIdMesa(Integer idMesa) {
-		this.idMesa = idMesa;
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
 	}
 
 	public String getNomeCliente() {
@@ -99,6 +96,10 @@ public class HePedido {
 
 	public void setObsLanche(String obsLanche) {
 		this.obsLanche = obsLanche;
+	}
+
+	public void setIdPedido(BigDecimal idPedido) {
+		this.idPedido = idPedido;
 	}
 
 }
