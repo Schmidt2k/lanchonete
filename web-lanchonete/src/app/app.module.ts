@@ -14,6 +14,7 @@ import { PagesComponent } from './pages/pages.component';
 import { MediaComponent } from './media/media.component';
 import { SettingsComponent } from './settings/settings.component';
 import { HttpClientModule} from '@angular/common/http';
+import { ModalInsertLancheComponent } from './alert-modal/modal-insert-lanche/modal-insert-lanche.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { HttpClientModule} from '@angular/common/http';
     CoupensComponent,
     PagesComponent,
     MediaComponent,
-    SettingsComponent
+    SettingsComponent,
+    ModalInsertLancheComponent
   ],
   imports: [
     BrowserModule,
