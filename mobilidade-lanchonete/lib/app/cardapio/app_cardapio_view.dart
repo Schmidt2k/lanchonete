@@ -18,6 +18,8 @@ class _AppCardapioViewState extends State<AppCardapioView> {
   int indexPage = 0;
   @override
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context).settings.arguments ??
+        <String, dynamic>{}) as Map;
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: indexPage,
@@ -25,9 +27,7 @@ class _AppCardapioViewState extends State<AppCardapioView> {
         onTap: (num) {
           setState(() {
             indexPage = num;
-            _pageController.animateToPage(num,
-                duration: Duration(milliseconds: 250),
-                curve: Curves.bounceInOut);
+            _pageController.jumpToPage(num);
           });
         },
         items: [
@@ -44,10 +44,13 @@ class _AppCardapioViewState extends State<AppCardapioView> {
         title: Text('Lanchonete FEMA'),
       ),
       body: PageView(
+        physics: NeverScrollableScrollPhysics(),
         controller: _pageController,
         children: [
           cardapio(),
-          AppPedidosRealizadosView(),
+          AppPedidosRealizadosView(
+            usuario: arguments['usuario'],
+          ),
           AppLoginUsuarioView()
         ],
       ),
