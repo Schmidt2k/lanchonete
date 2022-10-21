@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 class AppLancheDetalheView extends StatefulWidget {
@@ -25,8 +24,18 @@ class _AppLancheDetalheViewState extends State<AppLancheDetalheView> {
             " " +
             "(R\$${arguments['valorLanche'].toStringAsFixed(2)})"),
       ),
-      body: SingleChildScrollView(
-          child: lanche(arguments['imagem'], arguments['ingredientes'])),
+      body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+          image: AssetImage('assets/fundo.jpg'),
+          fit: BoxFit.cover,
+        )),
+        child: ListView(
+          children: [
+            lanche(arguments['imagem'], arguments['ingredientes']),
+          ],
+        ),
+      ),
     );
   }
 
@@ -36,7 +45,13 @@ class _AppLancheDetalheViewState extends State<AppLancheDetalheView> {
         imagemLanche(imagem),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: corpoLanche(ingredientes),
+          child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [BoxShadow(color: Colors.black26, spreadRadius: 1)],
+                color: Colors.white,
+              ),
+              child: corpoLanche(ingredientes)),
         )
       ],
     );
@@ -83,7 +98,7 @@ class _AppLancheDetalheViewState extends State<AppLancheDetalheView> {
                       ? 'Sem ingredientes cadastrados, informe ao estabelecimento.'
                       : ingredientes,
                   style: TextStyle(
-                    fontSize: 16.0,
+                    fontSize: 18.0,
                   ),
                 ),
               ),
@@ -106,114 +121,28 @@ class _AppLancheDetalheViewState extends State<AppLancheDetalheView> {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 18.0),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        flex: 1,
-                        child: TextFormField(
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(8.0),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
-                          ),
-                          controller: _controller,
-                          enabled: false,
-                          keyboardType: TextInputType.numberWithOptions(
-                            decimal: false,
-                            signed: true,
-                          ),
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.allow(RegExp(r'\d')),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 2.0),
-                        child: Container(
-                          color: Colors.black,
-                          height: 38.0,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                    bottom: BorderSide(
-                                      width: 0.5,
-                                    ),
-                                  ),
-                                ),
-                                child: InkWell(
-                                  child: Icon(
-                                    Icons.arrow_drop_up,
-                                    size: 18.0,
-                                    color: Colors.white,
-                                  ),
-                                  onTap: () {
-                                    int currentValue =
-                                        int.parse(_controller.text);
-                                    setState(() {
-                                      currentValue++;
-                                      _controller.text =
-                                          (currentValue).toString();
-                                    });
-                                  },
-                                ),
-                              ),
-                              InkWell(
-                                child: Icon(
-                                  Icons.arrow_drop_down,
-                                  size: 18.0,
-                                  color: Colors.white,
-                                ),
-                                onTap: () {
-                                  int currentValue =
-                                      int.parse(_controller.text);
-                                  setState(() {
-                                    currentValue--;
-                                    _controller.text =
-                                        (currentValue > 0 ? currentValue : 0)
-                                            .toString(); // decrementing value
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: RaisedButton(
-                  onPressed: () {},
-                  color: double.parse(_controller.text.trim()) > 0
-                      ? Colors.amber
-                      : null,
-                  child: Text(
-                    'Adicionar'.toUpperCase(),
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-            ],
+          child: TextFormField(
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Observação:',
+                hintText: 'Ex: sem cebola...',
+                labelStyle: TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.black,
+                )),
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: TextFormField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Observação',
+          child: SizedBox(
+            width: double.maxFinite,
+            child: FlatButton(
+              onPressed: () {},
+              color: Colors.amber,
+              child: Text(
+                'Adicionar'.toUpperCase(),
+                style: TextStyle(fontSize: 18.0),
+              ),
             ),
           ),
         ),

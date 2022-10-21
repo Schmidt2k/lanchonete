@@ -172,77 +172,38 @@ class _AppPedidosRealizadosViewState extends State<AppPedidosRealizadosView> {
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: ListTile(
-                              leading: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.delete_forever_sharp,
-                                  color: Colors.redAccent[700],
-                                ),
-                              ),
-                              title: Text(stream.data[index].nomeLanche),
-                              subtitle: Text(
-                                  "R\$ ${stream.data[index].valorLanche.toStringAsFixed(2)}"),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(
-                                height: 35,
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: 'Observação',
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  stream.data[index].nomeLanche,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.0,
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  "R\$ ${stream.data[index].valorLanche.toStringAsFixed(2)}",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     );
-
-                    // Card(
-                    //   elevation: 2.0,
-                    //   clipBehavior: Clip.antiAliasWithSaveLayer,
-                    //   shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.circular(10)),
-                    //   child: Padding(
-                    //     padding: const EdgeInsets.all(8.0),
-                    //     child: Row(
-                    //       children: [
-                    //         Expanded(
-                    //           child: Align(
-                    //             alignment: Alignment.centerLeft,
-                    //             child: Text(
-                    //               stream.data[index].nomeLanche,
-                    //               style: TextStyle(
-                    //                 fontWeight: FontWeight.bold,
-                    //                 fontSize: 16.0,
-                    //               ),
-                    //             ),
-                    //           ),
-                    //         ),
-                    //         Expanded(
-                    //           child: Align(
-                    //             alignment: Alignment.centerRight,
-                    //             child: Text(
-                    //               "R\$ ${stream.data[index].valorLanche.toStringAsFixed(2)}",
-                    //               style: TextStyle(
-                    //                 fontWeight: FontWeight.bold,
-                    //                 fontSize: 16.0,
-                    //               ),
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // );
                   });
             } else {
               return const Text('Empty data');
